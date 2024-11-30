@@ -13,16 +13,57 @@ class Board
   end
 
   def show
-    print "     1.   2.   3. \n"
+    print "\n     1.   2.   3. \n"
 
     board.each_with_index do |x, index|
       print index + 1, ". ", x, "\n"
     end
   end
 
+  def check_win
+    validate_rows_columns(board)
+    validate_rows_columns(board.transpose)
+    validate_diagonals(board)
+  end
+
   private
 
-  def check_win
+  def new_game
+    Game.new.play_game
+  end
+
+  def accept_diagonals(array, center)
+    return unless array.uniq.length == 1 && center != ""
+
+    puts " \n #{center} Won \n"
+    new_game
+  end
+
+  def validate_diagonals(board)
+    center = board[1][1]
+    main = [board[0][0], center, board[2][2]]
+    reverse = [board[2][0], center, board[0][2]]
+
+    accept_diagonals(main, center)
+    accept_diagonals(reverse, center)
+  end
+
+  def validate_rows_columns(board)
+    board.each do |val|
+      x_mark = 0
+      o_mark = 0
+      val.each do |mark|
+        x_mark += 1 if mark == "X"
+        o_mark += 1 if mark == "O"
+        if x_mark == 3
+          puts "\n X Won \n"
+          return new_game
+        elsif o_mark == 3
+          puts "\n O Won \n"
+          return new_game
+        end
+      end
+    end
   end
 
   def input_validation

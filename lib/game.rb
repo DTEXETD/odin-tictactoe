@@ -11,6 +11,7 @@ class Game
       @board.show
       currentplayer = @players[@current_player]
       @board.update(currentplayer.mark)
+      @board.check_win
       next_player
     end
   end
@@ -23,6 +24,6 @@ class Game
   end
 
   def game_over?
-    true # TO_DO
+    true
   end
 end
