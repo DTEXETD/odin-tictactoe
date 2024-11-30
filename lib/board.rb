@@ -3,7 +3,8 @@ class Board
   attr_accessor :board
 
   def initialize
-    @board = Array.new(3) { Array.new(3, "") }
+    @empty = ""
+    @board = Array.new(3) { Array.new(3, @empty) }
   end
 
   def update(mark)
@@ -21,6 +22,9 @@ class Board
 
   private
 
+  def check_win
+  end
+
   def input_validation
     puts "\nInsert Row:"
     val1 = gets.chomp.to_i
@@ -28,6 +32,10 @@ class Board
     val2 = gets.chomp.to_i
     if (val1 < 1 || val1 > 3) || (val2 < 1 || val2 > 3)
       puts "Please Insert Values Between 1 and 3 (inclusive)"
+      return input_validation
+    end
+    if board[val1 - 1][val2 - 1] != @empty
+      puts "Spot already taken, please choose a different one"
       return input_validation
     end
     [val1, val2]
