@@ -20,6 +20,19 @@ class Board
     end
   end
 
+  def check_draw
+    draw = 0
+    board.each do |val|
+      val.each do |mark|
+        draw += 1 if %w[X O].include?(mark)
+        if draw == 9
+          puts "\n DRAW \n"
+          return new_game
+        end
+      end
+    end
+  end
+
   def check_win
     validate_rows_columns(board)
     validate_rows_columns(board.transpose)

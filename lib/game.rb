@@ -12,6 +12,7 @@ class Game
       currentplayer = @players[@current_player]
       @board.update(currentplayer.mark)
       @board.check_win
+      @board.check_draw
       next_player
     end
   end
