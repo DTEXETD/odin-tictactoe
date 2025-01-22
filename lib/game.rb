@@ -1,8 +1,10 @@
+# frozen_string_literal: true
+
 # Responsible to play the actual game, with a board and two players
 class Game
   def initialize
     @board = Board.new
-    @players = [Player.new("Player 1", "X"), Player.new("Player 2", "O")]
+    @players = [Player.new('Player 1', 'X'), Player.new('Player 2', 'O')]
     @current_player = 0
   end
 

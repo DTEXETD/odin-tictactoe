@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # General Board for TicTacToe, Initializing an empty 3x3 board
 class Board
   attr_accessor :board
@@ -62,7 +64,7 @@ class Board
     accept_diagonals(reverse, center)
   end
 
-  def row_column_valid(board)
+  def row_column_valid(board) # rubocop:disable Metrics/MethodLength
     board.each do |val|
       x_mark = 0
       o_mark = 0
@@ -82,7 +84,7 @@ class Board
     end
   end
 
-  def input_valid
+  def input_valid # rubocop:disable Metrics/AbcSize,Metrics/MethodLength
     puts "\nInsert Row:"
     val1 = gets.chomp.to_i
     puts 'Insert Column:'
@@ -90,12 +92,12 @@ class Board
     if (val1 < 1 || val1 > 3) || (val2 < 1 || val2 > 3)
       puts "\nPlease Insert Values Between 1 and 3 (inclusive)"
       show
-      return input_val
+      return input_valid
     end
     if board[val1 - 1][val2 - 1] != @empty
       puts "\nSpot already taken, please choose a different one"
       show
-      return input_val
+      return input_valid
     end
     [val1, val2]
   end
